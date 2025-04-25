@@ -47,22 +47,12 @@ export default function Home() {
     if (devilkingsResponseRef.current) {
             devilkingsResponseRef.current.scrollTop = 0;
           }
-    try {
-      const result = await sageInteraction({ question });
-      setSageResponse(result.answer);
+    
+      setSageResponse("i am noob chatgpt gang try another agent like clekid ");
        if (sageResponseRef.current) {
                 sageResponseRef.current.scrollTop = 0;
               }
-    } catch (error: any) {
-      console.error("Sage Interaction Error:", error);
-      toast({
-        title: "Error",
-        description: `Failed to get Sage response: ${error.message}`,
-      });
-      setSageResponse("i am noob chatgpt gang try another agent like celikd ");
-    } finally {
-      setIsLoadingSage(false);
-    }
+    setIsLoadingSage(false);
   }, [question, toast]);
 
   const handleDevilkingsScenario = useCallback(async () => {

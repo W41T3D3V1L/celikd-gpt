@@ -131,7 +131,9 @@ export default function Home() {
           <CardContent className="p-4">
             <ScrollArea className="h-[200px] md:h-[300px] w-full">
               {sageResponse ? (
-                <p>{sageResponse}</p>
+                <div className="font-mono text-sm bg-gray-800 text-green-400 p-2 rounded-md">
+                  <pre>{sageResponse}</pre>
+                </div>
               ) : (
                 <p className="text-muted-foreground">
                   No response yet. Ask Sage a question!
@@ -148,7 +150,9 @@ export default function Home() {
           <CardContent className="p-4">
             <ScrollArea className="h-[200px] md:h-[300px] w-full">
               {devilkingsResponse ? (
-                <p>{devilkingsResponse}</p>
+                  <div className="font-mono text-sm bg-gray-800 text-green-400 p-2 rounded-md">
+                    <pre>{devilkingsResponse}</pre>
+                  </div>
               ) : (
                 <p className="text-muted-foreground">
                   No response yet. Ask Devilkings a question!

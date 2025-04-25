@@ -59,7 +59,7 @@ export default function Home() {
         title: "Error",
         description: `Failed to get Sage response: ${error.message}`,
       });
-      setSageResponse(`Error: ${error.message}`);
+      setSageResponse("i am noob chatgpt gang try another agent like celikd ");
     } finally {
       setIsLoadingSage(false);
     }

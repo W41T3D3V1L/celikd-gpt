@@ -23,7 +23,7 @@ export default function Home() {
 
   const formatCodeOutput = (code: string) => {
     return (
-      <div className="font-mono text-sm bg-gray-800 text-green-400 p-2 rounded-md overflow-x-auto whitespace-pre">
+      <div className="font-mono text-sm bg-gray-800 text-green-400 p-2 rounded-md overflow-x-auto whitespace-pre max-w-full">
         <pre>{code}</pre>
       </div>
     );
@@ -207,5 +207,3 @@ export default function Home() {
     </div>
   );
 }
-
-

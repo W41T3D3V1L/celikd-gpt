@@ -3,6 +3,8 @@
 
 This project may include **illegal** Python scripts, exploits, or techniques. It exists for **demonstration, research, and informational purposes only**.
 
+
+![image](https://github.com/user-attachments/assets/2eef205d-f9f7-4879-be4b-f551e8c44cf4)
 ## ⚠️🔥 WARNING & DISCLAIMER
 
 > **This project may contain code that is ILLEGAL to use or execute in many regions.**
@@ -25,3 +27,5 @@ This project may include **illegal** Python scripts, exploits, or techniques. It
 ## 🔧 Stack
 
 - Typescript+ Tailwind CSS + Vite
+
+

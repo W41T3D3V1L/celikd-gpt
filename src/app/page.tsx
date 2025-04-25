@@ -117,7 +117,7 @@ export default function Home() {
             placeholder="Enter your question here..."
             value={question}
             onChange={(e) => setQuestion(e.target.value)}
-            className="flex-grow"
+            className="flex-grow text-white"
           />
           <div className="flex flex-col">
            
@@ -207,3 +207,4 @@ export default function Home() {
     </div>
   );
 }
+

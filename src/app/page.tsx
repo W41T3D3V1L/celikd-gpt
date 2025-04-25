@@ -48,7 +48,7 @@ export default function Home() {
             devilkingsResponseRef.current.scrollTop = 0;
           }
     
-      setSageResponse("i am noob chatgpt gang try another agent like clekid ");
+      setSageResponse("i am noob chatgpt gang try another agent like celikd ");
        if (sageResponseRef.current) {
                 sageResponseRef.current.scrollTop = 0;
               }

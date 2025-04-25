@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef } from "react";
 import { sageInteraction } from "@/ai/flows/sage-interaction";
 import { devilkingsScenario } from "@/ai/flows/devilkings-scenario";
 import { Input } from "@/components/ui/input";
@@ -20,6 +20,9 @@ export default function Home() {
   const [isLoadingSage, setIsLoadingSage] = useState(false);
   const [isLoadingDevilkings, setIsLoadingDevilkings] = useState(false);
   const { toast } = useToast();
+
+  const sageResponseRef = useRef<HTMLDivElement>(null);
+  const devilkingsResponseRef = useRef<HTMLDivElement>(null);
 
   const formatCodeOutput = (code: string) => {
     return (
@@ -41,9 +44,15 @@ export default function Home() {
 
     setIsLoadingSage(true);
     setSageResponse(null); // Clear previous response
+    if (devilkingsResponseRef.current) {
+            devilkingsResponseRef.current.scrollTop = 0;
+          }
     try {
       const result = await sageInteraction({ question });
       setSageResponse(result.answer);
+       if (sageResponseRef.current) {
+                sageResponseRef.current.scrollTop = 0;
+              }
     } catch (error: any) {
       console.error("Sage Interaction Error:", error);
       toast({
@@ -67,9 +76,15 @@ export default function Home() {
 
     setIsLoadingDevilkings(true);
     setDevilkingsResponse(null); // Clear previous response
+        if (sageResponseRef.current) {
+            sageResponseRef.current.scrollTop = 0;
+          }
     try {
       const result = await devilkingsScenario({ question });
       setDevilkingsResponse(result.response);
+        if (devilkingsResponseRef.current) {
+            devilkingsResponseRef.current.scrollTop = 0;
+          }
     } catch (error: any) {
       console.error("Devilkings Scenario Error:", error);
       toast({

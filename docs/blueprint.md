@@ -1,4 +1,4 @@
-# **App Name**: CyberSage Spark
+# **App Name**: CELIKD
 
 ## Core Features:
 

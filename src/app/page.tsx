@@ -119,34 +119,40 @@ export default function Home() {
             onChange={(e) => setQuestion(e.target.value)}
             className="flex-grow"
           />
-          <Button
-            onClick={handleSageInteraction}
-            disabled={isLoadingSage}
-            className="bg-primary text-primary-foreground hover:bg-primary/80"
-          >
-            {isLoadingSage ? (
-              <>
-                Loading...
-                <RotateCw className="ml-2 h-4 w-4 animate-spin" />
-              </>
-            ) : (
-              "Ask Sage"
-            )}
-          </Button>
-          <Button
-            onClick={handleDevilkingsScenario}
-            disabled={isLoadingDevilkings}
-            className="bg-primary text-primary-foreground hover:bg-primary/80"
-          >
-            {isLoadingDevilkings ? (
-              <>
-                Loading...
-                <RotateCw className="ml-2 h-4 w-4 animate-spin" />
-              </>
-            ) : (
-              "Ask Devilkings"
-            )}
-          </Button>
+          <div className="flex flex-col">
+            <span className="text-xs text-muted-foreground text-center mb-1">AGENTS</span>
+            <Button
+              onClick={handleSageInteraction}
+              disabled={isLoadingSage}
+              className="bg-primary text-primary-foreground hover:bg-primary/80"
+            >
+              {isLoadingSage ? (
+                <>
+                  Loading...
+                  <RotateCw className="ml-2 h-4 w-4 animate-spin" />
+                </>
+              ) : (
+                "Ask Sage"
+              )}
+            </Button>
+          </div>
+          <div className="flex flex-col">
+            <span className="text-xs text-muted-foreground text-center mb-1">AGENTS</span>
+            <Button
+              onClick={handleDevilkingsScenario}
+              disabled={isLoadingDevilkings}
+              className="bg-primary text-primary-foreground hover:bg-primary/80"
+            >
+              {isLoadingDevilkings ? (
+                <>
+                  Loading...
+                  <RotateCw className="ml-2 h-4 w-4 animate-spin" />
+                </>
+              ) : (
+                "Ask Devilkings"
+              )}
+            </Button>
+          </div>
         </div>
       </section>
 

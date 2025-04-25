@@ -113,7 +113,7 @@ export default function Home() {
 
       <section className="mb-6">
         <div className="flex items-center space-x-2">
-         <Textarea
+         <Input
             placeholder="Enter your question here..."
             value={question}
             onChange={(e) => setQuestion(e.target.value)}
@@ -132,7 +132,7 @@ export default function Home() {
                   <RotateCw className="ml-2 h-4 w-4 animate-spin" />
                 </>
               ) : (
-                "Ask Sage"
+                "Ask REYNA"
               )}
             </Button>
           </div>
@@ -149,18 +149,18 @@ export default function Home() {
                   <RotateCw className="ml-2 h-4 w-4 animate-spin" />
                 </>
               ) : (
-                "Ask Devilkings"
+                "Ask CELIKD"
               )}
             </Button>
           </div>
         </div>
- <span className="text-xs text-muted-foreground text-center mb-1">AGENTS</span>
+ <span className="text-xs text-muted-foreground text-center">AGENTS</span>
       </section>
 
       <section className="flex flex-col md:flex-row space-y-4 md:space-x-4 md:space-y-0">
         <Card className="flex-1 bg-secondary">
           <CardHeader>
-            <CardTitle className="text-primary">Sage</CardTitle>
+            <CardTitle className="text-primary">REYNA</CardTitle>
           </CardHeader>
           <CardContent className="p-4">
             <ScrollArea className="h-[200px] md:h-[300px] w-full">
@@ -174,7 +174,7 @@ export default function Home() {
                   )
               ) : (
                 <p className="text-muted-foreground">
-                  No response yet. Ask Sage a question!
+                  No response yet. Ask REYNA a question!
                 </p>
               )}
             </ScrollArea>
@@ -183,7 +183,7 @@ export default function Home() {
 
         <Card className="flex-1 bg-secondary">
           <CardHeader>
-            <CardTitle className="text-primary">Devilkings</CardTitle>
+            <CardTitle className="text-primary">CELIKD</CardTitle>
           </CardHeader>
           <CardContent className="p-4">
             <ScrollArea className="h-[200px] md:h-[300px] w-full">
@@ -197,7 +197,7 @@ export default function Home() {
                   )
               ) : (
                 <p className="text-muted-foreground">
-                  No response yet. Ask Devilkings a question!
+                  No response yet. Ask CELIKD a question!
                 </p>
               )}
             </ScrollArea>
@@ -207,4 +207,5 @@ export default function Home() {
     </div>
   );
 }
+
 

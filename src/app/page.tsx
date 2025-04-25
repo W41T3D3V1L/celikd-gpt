@@ -120,7 +120,7 @@ export default function Home() {
             className="flex-grow"
           />
           <div className="flex flex-col">
-            <span className="text-xs text-muted-foreground text-center mb-1">AGENTS</span>
+           
             <Button
               onClick={handleSageInteraction}
               disabled={isLoadingSage}
@@ -137,7 +137,7 @@ export default function Home() {
             </Button>
           </div>
           <div className="flex flex-col">
-            <span className="text-xs text-muted-foreground text-center mb-1">AGENTS</span>
+           
             <Button
               onClick={handleDevilkingsScenario}
               disabled={isLoadingDevilkings}
@@ -154,6 +154,7 @@ export default function Home() {
             </Button>
           </div>
         </div>
+ <span className="text-xs text-muted-foreground text-center mb-1">AGENTS</span>
       </section>
 
       <section className="flex flex-col md:flex-row space-y-4 md:space-x-4 md:space-y-0">
@@ -206,4 +207,5 @@ export default function Home() {
     </div>
   );
 }
+
 

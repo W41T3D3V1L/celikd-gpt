@@ -9,6 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useToast } from "@/hooks/use-toast";
 import { RotateCw } from "lucide-react";
+import { Textarea } from "@/components/ui/textarea";
 
 export default function Home() {
   const [question, setQuestion] = useState("");
@@ -19,6 +20,15 @@ export default function Home() {
   const [isLoadingSage, setIsLoadingSage] = useState(false);
   const [isLoadingDevilkings, setIsLoadingDevilkings] = useState(false);
   const { toast } = useToast();
+
+  const formatCodeOutput = (code: string) => {
+    return (
+      <div className="font-mono text-sm bg-gray-800 text-green-400 p-2 rounded-md">
+        <pre>{code}</pre>
+      </div>
+    );
+  };
+
 
   const handleSageInteraction = useCallback(async () => {
     if (!question.trim()) {
@@ -85,8 +95,7 @@ export default function Home() {
 
       <section className="mb-6">
         <div className="flex items-center space-x-2">
-          <Input
-            type="text"
+         <Textarea
             placeholder="Enter your question here..."
             value={question}
             onChange={(e) => setQuestion(e.target.value)}
@@ -131,9 +140,13 @@ export default function Home() {
           <CardContent className="p-4">
             <ScrollArea className="h-[200px] md:h-[300px] w-full">
               {sageResponse ? (
-                <div className="font-mono text-sm bg-gray-800 text-green-400 p-2 rounded-md">
-                  <pre>{sageResponse}</pre>
-                </div>
+                  typeof sageResponse === 'string' && sageResponse.startsWith('```') ? (
+                    formatCodeOutput(sageResponse)
+                  ) : (
+                    <div className="font-mono text-sm bg-gray-800 text-green-400 p-2 rounded-md">
+                      <pre>{sageResponse}</pre>
+                    </div>
+                  )
               ) : (
                 <p className="text-muted-foreground">
                   No response yet. Ask Sage a question!
@@ -150,9 +163,13 @@ export default function Home() {
           <CardContent className="p-4">
             <ScrollArea className="h-[200px] md:h-[300px] w-full">
               {devilkingsResponse ? (
-                  <div className="font-mono text-sm bg-gray-800 text-green-400 p-2 rounded-md">
-                    <pre>{devilkingsResponse}</pre>
-                  </div>
+                  typeof devilkingsResponse === 'string' && devilkingsResponse.startsWith('```') ? (
+                    formatCodeOutput(devilkingsResponse)
+                  ) : (
+                    <div className="font-mono text-sm bg-gray-800 text-green-400 p-2 rounded-md">
+                      <pre>{devilkingsResponse}</pre>
+                    </div>
+                  )
               ) : (
                 <p className="text-muted-foreground">
                   No response yet. Ask Devilkings a question!

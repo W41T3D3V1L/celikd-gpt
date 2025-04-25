@@ -15,7 +15,7 @@ This project may include **illegal** Python scripts, exploits, or techniques. It
 > - **The author(s) take no responsibility** for any harm, legal issues, or consequences resulting from the use or misuse of this project.
 
 **You have been warned.**
-
+## NOTE : IF YOU FACES ANY ISSUE JUST SUBMIT THE TICKET
 ---
 
 ## 🧠 Purpose

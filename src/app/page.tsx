@@ -188,31 +188,27 @@ export default function Home() {
         </Card>
         */}
 
-        <Card className="flex-1 bg-secondary">
-          <CardHeader>
-            <CardTitle className="text-primary">CELIKD</CardTitle>
-          </CardHeader>
-          <CardContent className="p-4">
-            <ScrollArea className="h-[200px] md:h-[300px] w-full max-w-full">
+        
+          
+           
               {devilkingsResponse ? (
                   (devilkingsResponse.startsWith('```') || devilkingsResponse.includes('\n')) ? (
                     formatCodeOutput(devilkingsResponse)
                   ) : (
-                    <div className="font-mono text-sm bg-gray-800 text-green-400 p-2 rounded-md" style={{
+                    
+                      <pre className="font-mono text-sm bg-gray-800 text-green-400 p-2 rounded-md" style={{
                       width: 'auto',
                       maxWidth: '520px',
-                    }}>
-                      <pre>{devilkingsResponse}</pre>
-                    </div>
+                    }}>{devilkingsResponse}</pre>
+                    
                   )
               ) : (
                 <p className="text-muted-foreground">
                   No response yet. Ask CELIKD a question!
                 </p>
               )}
-            </ScrollArea>
-          </CardContent>
-        </Card>
+           
+         
       </section>
     </div>
   );

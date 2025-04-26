@@ -16,28 +16,28 @@ export default function Home() {
   const devilkingsResponseRef = useRef<HTMLDivElement>(null);
 
   const formatResponseWithExplanations = (text: string) => {
-    const lines = text.split("\n");
+    const lines = text.split('\n');
     let result: JSX.Element[] = [];
     let explanationLines: string[] = [];
     let codeLines: string[] = [];
     let inCode = false;
     let blockIndex = 0;
 
-    lines.forEach((line) => {
+    lines.forEach((line, index) => {
       if (line.startsWith("```")) {
         if (inCode) {
-          // End of code block
+          // Closing code block
           result.push(
             <div key={`block-${blockIndex}`} className="mb-6">
               {explanationLines.length > 0 && (
-                <div className="mb-2 text-sm text-white bg-gray-800 border border-gray-700 p-3 rounded">
+                <div className="mb-2 text-sm text-white bg-gray-700 p-2 rounded">
                   {explanationLines.map((exp, i) => (
                     <p key={i} className="mb-1">{exp}</p>
                   ))}
                 </div>
               )}
-              <pre className="font-mono text-sm bg-black text-green-400 p-4 rounded overflow-x-auto whitespace-pre-wrap border border-gray-700">
-                {codeLines.join("\n")}
+              <pre className="font-mono text-sm bg-black text-green-400 p-4 rounded overflow-x-auto whitespace-pre-wrap">
+                {codeLines.join('\n')}
               </pre>
             </div>
           );
@@ -52,16 +52,18 @@ export default function Home() {
         if (inCode) {
           codeLines.push(line);
         } else {
-          if (line.trim()) explanationLines.push(line);
+          if (line.trim()) {
+            explanationLines.push(line);
+          }
         }
       }
     });
 
-    // Final check for trailing explanation
+    // Append any trailing explanation if present
     if (explanationLines.length > 0 && codeLines.length === 0) {
       result.push(
         <div key={`trail-${blockIndex}`} className="mb-6">
-          <div className="mb-2 text-sm text-white bg-gray-800 border border-gray-700 p-3 rounded">
+          <div className="mb-2 text-sm text-white bg-gray-700 p-2 rounded">
             {explanationLines.map((exp, i) => (
               <p key={i} className="mb-1">{exp}</p>
             ))}
@@ -103,7 +105,7 @@ export default function Home() {
   }, [question, toast]);
 
   return (
-    <div className="flex flex-col min-h-screen bg-black p-4 md:p-8 text-white">
+    <div className="flex flex-col min-h-screen bg-background p-4 md:p-8 text-white">
       <header className="mb-10 text-center space-y-4">
         <h1 className="text-4xl font-bold text-primary drop-shadow-md tracking-wide">
           CELIKD GPT
@@ -126,7 +128,7 @@ export default function Home() {
             placeholder="Enter your question here..."
             value={question}
             onChange={(e) => setQuestion(e.target.value)}
-            className="flex-grow text-white bg-gray-800 placeholder-gray-400 border border-gray-700"
+            className="flex-grow text-white"
           />
           <Button
             onClick={handleDevilkingsScenario}
@@ -147,7 +149,7 @@ export default function Home() {
       </section>
 
       <section ref={devilkingsResponseRef} className="flex-1 mt-4">
-        <ScrollArea className="h-[400px] w-full rounded p-2 bg-gray-900 border border-gray-700">
+        <ScrollArea className="h-[400px] w-full rounded p-2 bg-secondary">
           {devilkingsResponse ? (
             <div>{formatResponseWithExplanations(devilkingsResponse)}</div>
           ) : (

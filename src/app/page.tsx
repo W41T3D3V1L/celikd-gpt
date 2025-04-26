@@ -42,7 +42,7 @@ export default function Home() {
   const handleCopy = (code: string, index: number) => {
     navigator.clipboard.writeText(code).then(() => {
       setCopiedIndex(index);
-      setTimeout(() => setCopiedIndex(null), 2000); // Reset after 2 seconds
+      setTimeout(() => setCopiedIndex(null), 2000);
     }).catch(() => {
       toast({ title: "Error", description: "Failed to copy code." });
     });
@@ -83,7 +83,7 @@ export default function Home() {
       </section>
 
       <section className="mt-4">
-        <ScrollArea className="w-full max-h-[80vh] rounded-lg border border-green-800 p-4 bg-black/30 backdrop-blur-md">
+        <ScrollArea className="w-full max-h-[80vh] p-2">
           <div
             ref={devilkingsResponseRef}
             className="whitespace-pre-wrap break-words text-sm tracking-wide space-y-6"
@@ -94,7 +94,7 @@ export default function Home() {
                   if (index % 2 === 1) {
                     // It's a code block
                     return (
-                      <div key={index} className="relative group bg-black/40 border border-green-800 rounded-lg p-4 text-green-300 font-mono overflow-auto">
+                      <div key={index} className="relative group">
                         <button
                           onClick={() => handleCopy(part.trim(), index)}
                           className="absolute top-2 right-2 p-1 rounded-md bg-green-700/20 hover:bg-green-700/40 transition hidden group-hover:block"
@@ -106,13 +106,15 @@ export default function Home() {
                             <Copy size={16} />
                           )}
                         </button>
-                        <pre className="overflow-x-auto text-sm">{part.trim()}</pre>
+                        <pre className="overflow-x-auto text-green-300 bg-transparent text-sm p-4 rounded-lg">
+                          {part.trim()}
+                        </pre>
                       </div>
                     );
                   } else {
                     // It's text
                     return (
-                      <p key={index} className="text-green-300">
+                      <p key={index} className="text-green-400 leading-relaxed">
                         {part}
                       </p>
                     );

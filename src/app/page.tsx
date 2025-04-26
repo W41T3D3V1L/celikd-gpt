@@ -25,10 +25,21 @@ export default function Home() {
     let inCodeBlock = false;
     let heading = '';
     let explanation = '';
+    let phaseHeading = ''; // For the phase headings
 
     lines.forEach((line, index) => {
-      if (line.trim().startsWith("###")) {
-        // Heading found
+      if (line.trim().startsWith("Phase")) {
+        // Phase Heading
+        if (phaseHeading) {
+          content.push(
+            <h2 key={`phase-heading-${index}`} className="text-2xl text-primary font-bold mt-8 mb-4">
+              {phaseHeading}
+            </h2>
+          );
+        }
+        phaseHeading = line.trim(); // Capture phase title (e.g., Phase 1: Reconnaissance)
+      } else if (line.trim().startsWith("###")) {
+        // Actionable Step Heading
         if (heading) {
           content.push(
             <h3 key={`heading-${index}`} className="text-xl text-primary font-semibold mt-6 mb-2">
@@ -36,7 +47,7 @@ export default function Home() {
             </h3>
           );
         }
-        heading = line.replace("###", "").trim(); // Extract heading text
+        heading = line.replace("###", "").trim(); // Extract step title
       } else if (line.trim().startsWith("**Explanation:**")) {
         // Explanation found
         explanation = line.replace("**Explanation:**", "").trim();
@@ -46,8 +57,8 @@ export default function Home() {
           </p>
         );
       } else if (line.trim().startsWith("```")) {
+        // Code Block
         if (inCodeBlock) {
-          // End of code block
           content.push(
             <pre
               key={`code-${index}`}
@@ -59,27 +70,24 @@ export default function Home() {
           currentBlock = [];
           inCodeBlock = false;
         } else {
-          // Start of code block
           inCodeBlock = true;
-          currentBlock = [];
         }
       } else {
         currentBlock.push(line);
       }
     });
 
-    if (heading && !content.some((el) => el.key === `heading-${lines.length}`)) {
+    if (phaseHeading && !content.some((el) => el.key === `phase-heading-${lines.length}`)) {
       content.push(
-        <h3 key={`heading-${lines.length}`} className="text-xl text-primary font-semibold mt-6 mb-2">
-          {heading}
-        </h3>
+        <h2 key={`phase-heading-${lines.length}`} className="text-2xl text-primary font-bold mt-8 mb-4">
+          {phaseHeading}
+        </h2>
       );
     }
 
     if (currentBlock.length > 0) {
       const blockText = currentBlock.join('\n').trim();
       if (inCodeBlock) {
-        // Unclosed code block
         content.push(
           <pre
             key={`code-end`}
@@ -89,7 +97,6 @@ export default function Home() {
           </pre>
         );
       } else {
-        // Regular paragraph
         content.push(
           <p key={`text-end`} className="text-sm text-gray-300 mb-3 leading-relaxed">
             {blockText}

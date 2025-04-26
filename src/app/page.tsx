@@ -43,6 +43,7 @@ export default function Home() {
     navigator.clipboard.writeText(code).then(() => {
       setCopiedIndex(index);
       setTimeout(() => setCopiedIndex(null), 2000);
+      toast({ title: "Success", description: "Code copied to clipboard!" });
     }).catch(() => {
       toast({ title: "Error", description: "Failed to copy code." });
     });
@@ -64,12 +65,12 @@ export default function Home() {
           placeholder="Type your hacking-style question..."
           value={question}
           onChange={(e) => setQuestion(e.target.value)}
-          className="w-full bg-transparent border border-green-700 text-green-300 placeholder:text-green-500"
+          className="w-full bg-transparent border border-green-700 text-green-300 placeholder:text-green-500 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300 ease-in-out"
         />
         <Button
           onClick={handleDevilkingsScenario}
           disabled={isLoadingDevilkings}
-          className="bg-green-600 hover:bg-green-700"
+          className="bg-green-600 hover:bg-green-700 transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-green-500"
         >
           {isLoadingDevilkings ? (
             <>
@@ -94,11 +95,11 @@ export default function Home() {
                   if (index % 2 === 1) {
                     // It's a code block
                     return (
-                      <div key={index} className="relative group">
+                      <div key={index} className="relative group bg-gray-800 p-4 rounded-lg shadow-lg">
                         <button
                           onClick={() => handleCopy(part.trim(), index)}
                           className="absolute top-2 right-2 p-1 rounded-md bg-green-700/20 hover:bg-green-700/40 transition hidden group-hover:block"
-                          title="Copy code"
+                          aria-label="Copy code"
                         >
                           {copiedIndex === index ? (
                             <span className="text-green-400 font-bold text-xs">✔ Copied</span>
@@ -127,6 +128,10 @@ export default function Home() {
           </div>
         </ScrollArea>
       </section>
+
+      <footer className="fixed bottom-0 left-0 right-0 p-4 bg-gray-900 text-center text-sm">
+        <p className="text-gray-500">Powered by C3L1KD</p>
+      </footer>
     </main>
   );
 }

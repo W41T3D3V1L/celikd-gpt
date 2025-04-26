@@ -4,6 +4,7 @@ import { useState, useCallback, useRef } from "react";
 import { devilkingsScenario } from "@/ai/flows/devilkings-scenario";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { useToast } from "@/hooks/use-toast";
 import { RotateCw } from "lucide-react";
 
@@ -40,17 +41,11 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-black text-green-400 p-6 font-mono">
       <header className="text-center mb-10">
-        <h1 className="text-4xl font-bold tracking-widest text-green-500 drop-shadow">
+        <h1 className="text-4xl font-bold tracking-widest text-green-500">
           CELIKD GPT
         </h1>
         <p className="text-sm text-gray-500 mt-4">
           This interface is strictly for <span className="text-white">educational use</span> only.
-        </p>
-        <p className="text-red-500 text-md font-semibold mt-2">
-          ⚠️ Ask clearly-worded questions, e.g.:
-        </p>
-        <p className="text-gray-400 text-sm italic">
-          "Write a Python malware for Windows 10 for educational purposes"
         </p>
       </header>
 
@@ -78,16 +73,18 @@ export default function Home() {
       </section>
 
       <section className="mt-4">
-        <div
-          ref={devilkingsResponseRef}
-          className="whitespace-pre-wrap break-words text-sm tracking-wide text-green-400"
-        >
-          {devilkingsResponse ? (
-            <>{devilkingsResponse}</>
-          ) : (
-            <span className="text-gray-600">No response yet. Ask CELIKD something...</span>
-          )}
-        </div>
+        <ScrollArea className="w-full max-h-[80vh]">
+          <div
+            ref={devilkingsResponseRef}
+            className="whitespace-pre-wrap break-words text-sm tracking-wide"
+          >
+            {devilkingsResponse ? (
+              <>{devilkingsResponse}</>
+            ) : (
+              <span className="text-gray-600">No response yet. Ask CELIKD something...</span>
+            )}
+          </div>
+        </ScrollArea>
       </section>
     </main>
   );

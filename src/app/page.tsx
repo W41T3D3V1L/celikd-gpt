@@ -72,7 +72,16 @@ export default function Home() {
       );
     }
 
-    return result;
+    // Return the result with extra formatting and spacing between sections
+    return (
+      <div>
+        {result.map((block, index) => (
+          <div key={index} className="mb-4">
+            {block}
+          </div>
+        ))}
+      </div>
+    );
   };
 
   const handleDevilkingsScenario = useCallback(async () => {
@@ -105,7 +114,7 @@ export default function Home() {
   }, [question, toast]);
 
   return (
-    <div className="flex flex-col min-h-screen bg-background p-4 md:p-8 text-white">
+    <div className="flex flex-col min-h-screen bg-background p-4 md:p-8 dark">
       <header className="mb-10 text-center space-y-4">
         <h1 className="text-4xl font-bold text-primary drop-shadow-md tracking-wide">
           CELIKD GPT
@@ -114,7 +123,7 @@ export default function Home() {
           This project may generate or demonstrate code that could be considered illegal if misused. <br />
           It is provided strictly for <span className="font-semibold text-white">educational purposes only</span>.
           <br />
-          <span className="text-yellow-400 font-medium">Use at your own risk</span>.
+          <span className="text-yellow-400 font-medium">Use at your own risk</span>.<br />
         </p>
         <p className="text-red-500 text-lg font-semibold uppercase tracking-wide drop-shadow-sm">
           Ask like: <br />

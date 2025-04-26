@@ -83,7 +83,7 @@ export default function Home() {
       </section>
 
       <section className="mt-4">
-        <ScrollArea className="w-full max-h-[110vh] p-4 pb-20">
+        <ScrollArea className="w-full max-h-[80vh] overflow-y-auto p-2">
           <div
             ref={devilkingsResponseRef}
             className="whitespace-pre-wrap break-words text-sm tracking-wide space-y-6"

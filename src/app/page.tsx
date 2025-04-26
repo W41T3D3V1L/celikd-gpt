@@ -194,7 +194,7 @@ export default function Home() {
             <CardTitle className="text-primary">CELIKD</CardTitle>
           </CardHeader>
           <CardContent className="p-4">
-            <ScrollArea className="h-[200px] md:h-[300px] w-full">
+            <ScrollArea className="h-[200px] md:h-[300px] w-full max-w-full">
               {devilkingsResponse ? (
                   (devilkingsResponse.startsWith('```') || devilkingsResponse.includes('\n')) ? (
                     formatCodeOutput(devilkingsResponse)

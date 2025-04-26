@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useCallback, useRef } from "react";
-import { sageInteraction } from "@/ai/flows/sage-interaction";
 import { devilkingsScenario } from "@/ai/flows/devilkings-scenario";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -199,7 +198,10 @@ export default function Home() {
                   (devilkingsResponse.startsWith('```') || devilkingsResponse.includes('\n')) ? (
                     formatCodeOutput(devilkingsResponse)
                   ) : (
-                    <div className="font-mono text-sm bg-gray-800 text-green-400 p-2 rounded-md">
+                    <div className="font-mono text-sm bg-gray-800 text-green-400 p-2 rounded-md" style={{
+                      width: 'auto',
+                      maxWidth: '520px',
+                    }}>
                       <pre>{devilkingsResponse}</pre>
                     </div>
                   )

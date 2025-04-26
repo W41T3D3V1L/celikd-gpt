@@ -105,7 +105,7 @@ export default function Home() {
   }, [question, toast]);
 
   return (
-    <div className="flex flex-col min-h-screen bg-background p-4 md:p-8 text-white">
+    <div className="flex flex-col min-h-screen bg-black p-4 md:p-8 text-white">
       <header className="mb-10 text-center space-y-4">
         <h1 className="text-4xl font-bold text-primary drop-shadow-md tracking-wide">
           CELIKD GPT

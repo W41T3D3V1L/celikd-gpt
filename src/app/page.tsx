@@ -4,7 +4,6 @@ import { useState, useCallback, useRef } from "react";
 import { devilkingsScenario } from "@/ai/flows/devilkings-scenario";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useToast } from "@/hooks/use-toast";
 import { RotateCw } from "lucide-react";
@@ -165,22 +164,17 @@ export default function Home() {
       </section>
 
       <section className="flex flex-col md:flex-row space-y-4 md:space-x-4 md:space-y-0">
-        <Card className="flex-1 bg-secondary">
-          <CardHeader>
-            <CardTitle className="text-primary">CELIKD RESPONSE</CardTitle>
-          </CardHeader>
-          <CardContent className="p-4">
-            <ScrollArea className="h-[200px] md:h-[300px] w-full">
-              {devilkingsResponse ? (
-                formatCodeOutput(devilkingsResponse)
-              ) : (
-                <p className="text-muted-foreground">
-                  No response yet. Ask CELIKD a question!
-                </p>
-              )}
-            </ScrollArea>
-          </CardContent>
-        </Card>
+        <div className="flex-1 bg-secondary p-4">
+          <ScrollArea className="h-[200px] md:h-[300px] w-full">
+            {devilkingsResponse ? (
+              formatCodeOutput(devilkingsResponse)
+            ) : (
+              <p className="text-muted-foreground">
+                No response yet. Ask CELIKD a question!
+              </p>
+            )}
+          </ScrollArea>
+        </div>
       </section>
     </div>
   );

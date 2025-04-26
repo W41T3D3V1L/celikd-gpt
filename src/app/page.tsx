@@ -29,6 +29,11 @@ export default function Home() {
         if (inCodeBlock) {
           // End of code block
           content.push(
+            <div key={`explanation-${index}`} className="text-sm text-gray-300 mb-2 leading-relaxed">
+              Explanation above code block.
+            </div>
+          );
+          content.push(
             <pre
               key={`code-${index}`}
               className="bg-gray-900 text-green-400 font-mono text-sm p-4 rounded-md mb-4 overflow-x-auto whitespace-pre-wrap"
@@ -52,6 +57,11 @@ export default function Home() {
       const blockText = currentBlock.join("\n").trim();
       if (inCodeBlock) {
         // Unclosed code block
+        content.push(
+          <div key={`explanation-end`} className="text-sm text-gray-300 mb-2 leading-relaxed">
+            Explanation above code block.
+          </div>
+        );
         content.push(
           <pre
             key={`code-end`}

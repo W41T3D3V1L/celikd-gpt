@@ -48,7 +48,7 @@ export default function Home() {
             devilkingsResponseRef.current.scrollTop = 0;
           }
     
-      setSageResponse("i am noob chatgpt gang try another agent like celikd ");
+      setSageResponse("i am noob chatgpt gang try another agent like clekid ");
        if (sageResponseRef.current) {
                 sageResponseRef.current.scrollTop = 0;
               }
@@ -125,7 +125,7 @@ export default function Home() {
             className="flex-grow text-white"
           />
           <div className="flex flex-col">
-           
+           {/*
             <Button
               onClick={handleSageInteraction}
               disabled={isLoadingSage}
@@ -140,6 +140,7 @@ export default function Home() {
                 "Ask REYNA"
               )}
             </Button>
+            */}
           </div>
           <div className="flex flex-col">
            
@@ -163,6 +164,7 @@ export default function Home() {
       </section>
 
       <section className="flex flex-col md:flex-row space-y-4 md:space-x-4 md:space-y-0">
+        {/*
         <Card className="flex-1 bg-secondary">
           <CardHeader>
             <CardTitle className="text-primary">REYNA</CardTitle>
@@ -185,6 +187,7 @@ export default function Home() {
             </ScrollArea>
           </CardContent>
         </Card>
+        */}
 
         <Card className="flex-1 bg-secondary">
           <CardHeader>

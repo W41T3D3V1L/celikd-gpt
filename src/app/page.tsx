@@ -105,9 +105,9 @@ export default function Home() {
   }, [question, toast]);
 
   return (
-    <div className="flex flex-col min-h-screen bg-background p-4 md:p-8 text-white">
+    <div className="flex flex-col min-h-screen bg-gray p-4 md:p-8 text-white">
       <header className="mb-10 text-center space-y-4">
-        <h1 className="text-4xl font-bold text-primary drop-shadow-md tracking-wide">
+        <h1 className="text-4xl font-bold text-white drop-shadow-md tracking-wide">
           CELIKD GPT
         </h1>
         <p className="text-sm text-muted-foreground max-w-xl mx-auto">
@@ -125,11 +125,11 @@ export default function Home() {
       <section className="mb-6">
         <div className="flex items-center space-x-2">
           <Input
-            placeholder="Enter your question here..."
-            value={question}
-            onChange={(e) => setQuestion(e.target.value)}
-            className="flex-grow text-white"
-          />
+  placeholder="Enter your question here..."
+  value={question}
+  onChange={(e) => setQuestion(e.target.value)}
+  className="flex-grow text-white bg-gray-800 placeholder-gray-400 border border-gray-700"
+/>
           <Button
             onClick={handleDevilkingsScenario}
             disabled={isLoadingDevilkings}
@@ -149,7 +149,7 @@ export default function Home() {
       </section>
 
       <section ref={devilkingsResponseRef} className="flex-1 mt-4">
-        <ScrollArea className="h-[400px] w-full rounded p-2 bg-secondary">
+        <ScrollArea className="h-[400px] w-full rounded p-2 bg-black">
           {devilkingsResponse ? (
             <div>{formatResponseWithExplanations(devilkingsResponse)}</div>
           ) : (

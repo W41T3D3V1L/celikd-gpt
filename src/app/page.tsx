@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useToast } from "@/hooks/use-toast";
-import { RotateCw, Bot, User, Send } from "lucide-react"; // Added Bot and User icons
+import { RotateCw, Bot, User, Send, Copy } from "lucide-react"; // Added Copy icon
 
 export default function Home() {
   const [question, setQuestion] = useState("");
@@ -44,6 +44,14 @@ export default function Home() {
     }
   }, [question, toast]);
 
+  const handleCopy = (code: string) => {
+    navigator.clipboard.writeText(code).then(() => {
+      toast({ title: "Copied!", description: "Code copied to clipboard." });
+    }).catch(() => {
+      toast({ title: "Error", description: "Failed to copy." });
+    });
+  };
+
   return (
     <main className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black text-green-400 p-6 font-mono">
       <header className="text-center mb-10">
@@ -78,12 +86,20 @@ export default function Home() {
                       i % 2 === 0 ? (
                         <span key={i}>{part}</span>
                       ) : (
-                        <pre
-                          key={i}
-                          className="bg-black/70 p-3 rounded-lg border border-green-700 overflow-x-auto text-green-300 text-xs font-mono"
-                        >
-                          {part.trim()}
-                        </pre>
+                        <div key={i} className="relative group">
+                          <pre
+                            className="bg-black/70 p-3 rounded-lg border border-green-700 overflow-x-auto text-green-300 text-xs font-mono"
+                          >
+                            {part.trim()}
+                          </pre>
+                          <button
+                            onClick={() => handleCopy(part.trim())}
+                            className="absolute top-2 right-2 p-1 rounded-md bg-green-700/20 hover:bg-green-700/40 transition hidden group-hover:block"
+                            title="Copy code"
+                          >
+                            <Copy size={16} />
+                          </button>
+                        </div>
                       )
                     )}
                   </div>

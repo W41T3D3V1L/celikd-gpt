@@ -23,9 +23,29 @@ export default function Home() {
     let content: JSX.Element[] = [];
     let currentBlock: string[] = [];
     let inCodeBlock = false;
+    let heading = '';
+    let explanation = '';
 
     lines.forEach((line, index) => {
-      if (line.trim().startsWith("```")) {
+      if (line.trim().startsWith("###")) {
+        // Heading found
+        if (heading) {
+          content.push(
+            <h3 key={`heading-${index}`} className="text-xl text-primary font-semibold mt-6 mb-2">
+              {heading}
+            </h3>
+          );
+        }
+        heading = line.replace("###", "").trim(); // Extract heading text
+      } else if (line.trim().startsWith("**Explanation:**")) {
+        // Explanation found
+        explanation = line.replace("**Explanation:**", "").trim();
+        content.push(
+          <p key={`explanation-${index}`} className="text-sm text-gray-300 mb-3 leading-relaxed">
+            {explanation}
+          </p>
+        );
+      } else if (line.trim().startsWith("```")) {
         if (inCodeBlock) {
           // End of code block
           content.push(
@@ -47,6 +67,14 @@ export default function Home() {
         currentBlock.push(line);
       }
     });
+
+    if (heading && !content.some((el) => el.key === `heading-${lines.length}`)) {
+      content.push(
+        <h3 key={`heading-${lines.length}`} className="text-xl text-primary font-semibold mt-6 mb-2">
+          {heading}
+        </h3>
+      );
+    }
 
     if (currentBlock.length > 0) {
       const blockText = currentBlock.join('\n').trim();

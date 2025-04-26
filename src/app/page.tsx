@@ -23,12 +23,38 @@ export default function Home() {
   const sageResponseRef = useRef<HTMLDivElement>(null);
   const devilkingsResponseRef = useRef<HTMLDivElement>(null);
 
-  const formatCodeOutput = (code: string) => {
-    return (
-      <div className="font-mono text-sm bg-gray-800 text-green-400 p-2 rounded-md overflow-x-auto whitespace-pre max-w-full">
-        <pre>{code}</pre>
-      </div>
-    );
+  const formatCodeOutput = (text: string) => {
+    const lines = text.split('\n');
+    let codeBlock = '';
+    let description = '';
+    let inCode = false;
+
+    lines.forEach(line => {
+      if (line.startsWith('```')) {
+        inCode = !inCode;
+        if (inCode) {
+          codeBlock += '<pre class="font-mono text-sm bg-gray-800 text-green-400 p-2 rounded-md overflow-x-auto whitespace-pre max-w-full">';
+        } else {
+          codeBlock += '</pre>';
+        }
+      } else {
+        if (inCode) {
+          codeBlock += line + '\n';
+        } else {
+          description += line + '\n';
+        }
+      }
+    });
+
+    let formattedOutput = '';
+    if (description.trim() !== '') {
+      formattedOutput += `<p>${description.trim()}</p>`;
+    }
+    if (codeBlock.trim() !== '') {
+      formattedOutput += codeBlock;
+    }
+
+    return <div dangerouslySetInnerHTML={{ __html: formattedOutput }} />;
   };
 
 
@@ -192,16 +218,7 @@ export default function Home() {
           
            
               {devilkingsResponse ? (
-                  (devilkingsResponse.startsWith('```') || devilkingsResponse.includes('\n')) ? (
-                    formatCodeOutput(devilkingsResponse)
-                  ) : (
-                    
-                      <pre className="font-mono text-sm bg-gray-800 text-green-400 p-2 rounded-md" style={{
-                      width: 'auto',
-                      maxWidth: '520px',
-                    }}>{devilkingsResponse}</pre>
-                    
-                  )
+                 formatCodeOutput(devilkingsResponse)
               ) : (
                 <p className="text-muted-foreground">
                   No response yet. Ask CELIKD a question!

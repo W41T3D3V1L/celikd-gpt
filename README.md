@@ -4,7 +4,8 @@
 This project may include **illegal** Python scripts, exploits, or techniques. It exists for **demonstration, research, and informational purposes only**.
 
 
-![image](https://github.com/user-attachments/assets/2eef205d-f9f7-4879-be4b-f551e8c44cf4)
+![image](https://github.com/user-attachments/assets/586597de-c1ae-4889-bfd6-3a9b46e8876b)
+
 ## ⚠️🔥 WARNING & DISCLAIMER
 
 > **This project may contain code that is ILLEGAL to use or execute in many regions.**

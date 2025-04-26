@@ -11,46 +11,41 @@ import { RotateCw } from "lucide-react";
 
 export default function Home() {
   const [question, setQuestion] = useState("");
-  const [sageResponse, setSageResponse] = useState<string | null>(null);
   const [devilkingsResponse, setDevilkingsResponse] = useState<string | null>(null);
-  const [isLoadingSage, setIsLoadingSage] = useState(false);
   const [isLoadingDevilkings, setIsLoadingDevilkings] = useState(false);
   const { toast } = useToast();
 
-  const sageResponseRef = useRef<HTMLDivElement>(null);
   const devilkingsResponseRef = useRef<HTMLDivElement>(null);
 
-  // ✅ Fixed formatCodeOutput function
   const formatCodeOutput = (text: string) => {
-    const lines = text.split("\n");
+    const lines = text.split('\n');
+    let codeBlock = '';
+    let description = '';
     let inCode = false;
-    let formattedOutput = "";
-    let tempCode = "";
-    let tempDesc = "";
 
-    lines.forEach((line) => {
-      if (line.startsWith("```")) {
-        if (inCode) {
-          formattedOutput += `<pre class="font-mono text-sm bg-gray-800 text-green-400 p-4 rounded-md overflow-x-auto whitespace-pre-wrap mb-4">${tempCode.trim()}</pre>`;
-          tempCode = "";
-        } else {
-          if (tempDesc.trim() !== "") {
-            formattedOutput += `<p class="text-white mb-2">${tempDesc.trim()}</p>`;
-            tempDesc = "";
-          }
-        }
+    lines.forEach(line => {
+      if (line.startsWith('```')) {
         inCode = !inCode;
+        if (inCode) {
+          codeBlock += '<pre class="font-mono text-sm bg-[#1a1a1a] text-green-400 p-3 rounded-lg overflow-x-auto whitespace-pre max-w-full shadow-md shadow-green-400/20">';
+        } else {
+          codeBlock += '</pre>';
+        }
       } else {
         if (inCode) {
-          tempCode += line + "\n";
+          codeBlock += line + '\n';
         } else {
-          tempDesc += line + "\n";
+          description += line + '\n';
         }
       }
     });
 
-    if (tempDesc.trim() !== "") {
-      formattedOutput += `<p class="text-white mb-2">${tempDesc.trim()}</p>`;
+    let formattedOutput = '';
+    if (description.trim() !== '') {
+      formattedOutput += `<p>${description.trim()}</p>`;
+    }
+    if (codeBlock.trim() !== '') {
+      formattedOutput += codeBlock;
     }
 
     return <div dangerouslySetInnerHTML={{ __html: formattedOutput }} />;
@@ -58,21 +53,22 @@ export default function Home() {
 
   const handleDevilkingsScenario = useCallback(async () => {
     if (!question.trim()) {
-      toast({ title: "Error", description: "Please enter a question." });
+      toast({
+        title: "Error",
+        description: "Please enter a question.",
+      });
       return;
     }
 
     setIsLoadingDevilkings(true);
     setDevilkingsResponse(null);
-
-    if (sageResponseRef.current) {
-      sageResponseRef.current.scrollTop = 0;
+    if (devilkingsResponseRef.current) {
+      devilkingsResponseRef.current.scrollTop = 0;
     }
 
     try {
       const result = await devilkingsScenario({ question });
       setDevilkingsResponse(result.response);
-
       if (devilkingsResponseRef.current) {
         devilkingsResponseRef.current.scrollTop = 0;
       }
@@ -124,7 +120,6 @@ export default function Home() {
             onChange={(e) => setQuestion(e.target.value)}
             className="flex-grow text-white"
           />
-
           <Button
             onClick={handleDevilkingsScenario}
             disabled={isLoadingDevilkings}
@@ -140,26 +135,32 @@ export default function Home() {
             )}
           </Button>
         </div>
-        <span className="text-xs text-muted-foreground text-center block mt-1">AGENTS</span>
+        <span className="text-xs text-muted-foreground text-center">AGENTS</span>
       </section>
 
-      <section className="flex flex-col space-y-4">
-        {devilkingsResponse ? (
-          <Card className="bg-secondary">
-            <CardHeader>
-              <CardTitle className="text-primary">CELIKD</CardTitle>
-            </CardHeader>
-            <CardContent className="p-4">
-              <ScrollArea className="h-[300px] w-full" ref={devilkingsResponseRef}>
-                {formatCodeOutput(devilkingsResponse)}
-              </ScrollArea>
-            </CardContent>
-          </Card>
-        ) : (
-          <p className="text-muted-foreground text-center">
-            No response yet. Ask CELIKD a question!
-          </p>
-        )}
+      <section className="flex flex-col md:flex-row space-y-4 md:space-x-4 md:space-y-0">
+        <Card className="flex-1 bg-[#0f0f0f] border border-green-600/30 shadow-lg shadow-green-500/10 backdrop-blur-lg">
+          <CardHeader>
+            <CardTitle className="text-green-400 tracking-wide drop-shadow">
+              CELIKD Response
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="p-4">
+            <ScrollArea className="h-[300px] md:h-[400px] w-full pr-2">
+              <div ref={devilkingsResponseRef}>
+                {devilkingsResponse ? (
+                  <div className="prose prose-invert prose-sm max-w-full">
+                    {formatCodeOutput(devilkingsResponse)}
+                  </div>
+                ) : (
+                  <p className="text-muted-foreground italic">
+                    No response yet. Ask CELIKD a question!
+                  </p>
+                )}
+              </div>
+            </ScrollArea>
+          </CardContent>
+        </Card>
       </section>
     </div>
   );

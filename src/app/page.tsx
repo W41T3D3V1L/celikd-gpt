@@ -20,7 +20,7 @@ export default function Home() {
   const devilkingsResponseRef = useRef<HTMLDivElement>(null);
 
   const formatCodeOutput = (text: string) => {
-    const lines = text.split('\n');
+    const lines = text.split("\n");
     let content: JSX.Element[] = [];
     let currentBlock: string[] = [];
     let inCodeBlock = false;
@@ -34,7 +34,7 @@ export default function Home() {
               key={`code-${index}`}
               className="bg-gray-900 text-green-400 font-mono text-sm p-4 rounded-md mb-4 overflow-x-auto whitespace-pre-wrap"
             >
-              {currentBlock.join('\n')}
+              {currentBlock.join("\n")}
             </pre>
           );
           currentBlock = [];
@@ -50,7 +50,7 @@ export default function Home() {
     });
 
     if (currentBlock.length > 0) {
-      const blockText = currentBlock.join('\n').trim();
+      const blockText = currentBlock.join("\n").trim();
       if (inCodeBlock) {
         // Unclosed code block
         content.push(
